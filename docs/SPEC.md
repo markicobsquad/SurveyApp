@@ -45,7 +45,7 @@ Aplikasi fullstack PWA (mobile-first) untuk mengumpulkan data survei "Pengelolaa
 | 12 | manfaat_keseluruhan | scale 1–5 | ya | - |
 | 13 | bersedia_uji_coba | radio | ya | Ya / Mungkin / Tidak |
 | 14 | fitur_tambahan | textarea | tidak | - |
-| 15 | kontak | text | tidak | email atau nomor WA |
+| 15 | kontak | email | ya | alamat email valid |
 
 Teks lengkap tiap pertanyaan (ID + EN) mengikuti dokumen asli yang dilampirkan user — gunakan sebagai sumber copy, jangan diringkas.
 
