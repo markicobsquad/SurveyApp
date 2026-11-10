@@ -59,7 +59,7 @@ const CSV_HEADERS = [
   'Q12 Manfaat Keseluruhan (1-5)',
   'Bersedia Uji Coba',
   'Fitur Tambahan',
-  'Kontak',
+  'Email',
 ] as const
 
 /** Escape satu sel CSV: bungkus kutip ganda jika mengandung koma / kutip / newline / titik-koma. */
