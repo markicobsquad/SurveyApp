@@ -42,7 +42,7 @@ Tim Sudo Squad sedang mengembangkan produk kompetisi berupa aplikasi pengelola j
 
 ## 7. Risiko & Asumsi
 - **Asumsi**: deployment menyediakan Node.js dan environment variables untuk Next.js, Prisma, dan koneksi PostgreSQL Neon.
-- **Risiko keamanan**: data responden mencakup kontak opsional; akses baca hasil harus tetap dibatasi ke sesi admin di server.
+- **Risiko keamanan**: data responden mencakup alamat email; akses baca hasil harus tetap dibatasi ke sesi admin di server.
 - **Risiko data**: tanpa validasi server-side yang kuat, ada kemungkinan submission ganda/spam — mitigasi minimal: disable tombol submit setelah diklik, tidak ada mitigasi anti-bot di MVP.
 
 ## 8. Timeline (indikatif)
