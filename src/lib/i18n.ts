@@ -62,14 +62,14 @@ const id = {
     'Apakah Anda bersedia mencoba aplikasi ini selama uji coba dua minggu?',
   'q14.title': 'Fitur apa yang belum ada tetapi Anda butuhkan?',
   'q14.placeholder': 'Tuliskan fitur yang Anda butuhkan…',
-  'q15.title':
-    'Jika bersedia ikut uji coba, tulis email atau nomor WhatsApp Anda.',
-  'q15.placeholder': 'email@contoh.com atau 08xxxxxxxxxx',
+  'q15.title': 'Masukkan alamat email aktif Anda.',
+  'q15.placeholder': 'email@contoh.com',
 
   // Validasi
   'error.required': 'Wajib diisi',
   'error.selectOne': 'Pilih minimal satu opsi',
   'error.answerAll': 'Jawab semua baris',
+  'error.invalidEmail': 'Masukkan alamat email yang valid',
   'matrix.answered': '{a}/{b} terjawab',
 
   // Tombol
@@ -190,14 +190,14 @@ const en: Record<TKey, string> = {
   'q13.title': 'Would you join a two-week trial?',
   'q14.title': 'What feature is missing that you need?',
   'q14.placeholder': 'Describe the feature you need…',
-  'q15.title':
-    "If you'd like to join the trial, leave your email or WhatsApp number.",
-  'q15.placeholder': 'email@example.com or 08xxxxxxxxxx',
+  'q15.title': 'Enter your active email address.',
+  'q15.placeholder': 'email@example.com',
 
   // Validation
   'error.required': 'This field is required',
   'error.selectOne': 'Select at least one option',
   'error.answerAll': 'Answer all rows',
+  'error.invalidEmail': 'Enter a valid email address',
   'matrix.answered': '{a}/{b} answered',
 
   // Buttons
