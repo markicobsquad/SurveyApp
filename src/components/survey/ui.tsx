@@ -134,6 +134,7 @@ interface TextInputProps {
   placeholder?: string
   type?: 'text' | 'email' | 'password'
   error?: boolean
+  required?: boolean
   ariaLabel?: string
   autoComplete?: string
 }
@@ -144,12 +145,14 @@ export function TextInput({
   placeholder,
   type = 'text',
   error = false,
+  required = false,
   ariaLabel,
   autoComplete,
 }: TextInputProps) {
   return (
     <input
       type={type}
+      required={required}
       value={value}
       aria-label={ariaLabel}
       autoComplete={autoComplete}
