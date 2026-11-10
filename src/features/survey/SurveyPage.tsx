@@ -40,6 +40,7 @@ import {
 } from '@/lib/survey-options'
 import type { SurveyFormData } from '@/lib/types'
 import type { TKey } from '@/lib/i18n'
+import { isValidEmail } from '@/lib/validation'
 
 // ---------- State ----------
 
@@ -83,7 +84,7 @@ const INITIAL_STATE: SurveyState = {
   kontak: '',
 }
 
-type ErrorKey = 'required' | 'selectOne' | 'answerAll'
+type ErrorKey = 'required' | 'selectOne' | 'answerAll' | 'invalidEmail'
 type FieldErrors = Partial<Record<string, ErrorKey>>
 
 function validateStep(step: number, s: SurveyState): FieldErrors {
@@ -104,6 +105,8 @@ function validateStep(step: number, s: SurveyState): FieldErrors {
       errors.kebermanfaatan = 'answerAll'
     if (s.manfaatKeseluruhan === 0) errors.manfaatKeseluruhan = 'required'
     if (!s.bersediaUjiCoba) errors.bersediaUjiCoba = 'required'
+    if (!s.kontak.trim()) errors.kontak = 'required'
+    else if (!isValidEmail(s.kontak)) errors.kontak = 'invalidEmail'
   }
   return errors
 }
@@ -112,6 +115,7 @@ const ERROR_MESSAGE_KEY: Record<ErrorKey, TKey> = {
   required: 'error.required',
   selectOne: 'error.selectOne',
   answerAll: 'error.answerAll',
+  invalidEmail: 'error.invalidEmail',
 }
 
 // ---------- Page ----------
@@ -152,7 +156,7 @@ export default function SurveyPage() {
     const fieldsByStep = [
       ['statusMahasiswa', 'angkatan', 'programStudi'],
       ['jumlahGrupWa', 'sumberInfo', 'kejadian', 'penyebabUtama', 'wifiHambatan', 'sulitTempatBelajar'],
-      ['kebermanfaatan', 'manfaatKeseluruhan', 'bersediaUjiCoba'],
+      ['kebermanfaatan', 'manfaatKeseluruhan', 'bersediaUjiCoba', 'kontak'],
     ]
     setTouched((previous) => ({
       ...previous,
@@ -204,7 +208,7 @@ export default function SurveyPage() {
         manfaatKeseluruhan: form.manfaatKeseluruhan,
         bersediaUjiCoba: form.bersediaUjiCoba,
         fiturTambahan: form.fiturTambahan.trim() || null,
-        kontak: form.kontak.trim() || null,
+        kontak: form.kontak.trim(),
       }
       await submitSurvey(payload)
       toast.success(t('toast.success'))
@@ -548,13 +552,16 @@ export default function SurveyPage() {
                   num={15}
                   labelledById="q-kontak"
                   title={t('q15.title')}
-                  optionalLabel={t('badge.optional')}
+                  error={errorFor('kontak')}
                 >
                   <TextInput
+                    type="email"
+                    required
                     value={form.kontak}
-                    onChange={(v) => setForm((prev) => ({ ...prev, kontak: v }))}
+                    onChange={(v) => update('kontak', v)}
                     placeholder={t('q15.placeholder')}
                     ariaLabel={t('q15.title')}
+                    error={Boolean(errorFor('kontak'))}
                   />
                 </QuestionCard>
               </>
