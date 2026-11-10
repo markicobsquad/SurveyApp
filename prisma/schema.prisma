@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model SurveyResponse {
+  id                 String   @id @default(uuid()) @db.Uuid
+  createdAt          DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  statusMahasiswa    String   @map("status_mahasiswa")
+  angkatan           String
+  programStudi       String   @map("program_studi")
+  jumlahGrupWa       String   @map("jumlah_grup_wa")
+  sumberInfo         String[] @map("sumber_info")
+  sumberInfoLainnya  String?  @map("sumber_info_lainnya")
+  kejadian           Json
+  penyebabUtama      String[] @map("penyebab_utama")
+  penyebabLainnya    String?  @map("penyebab_lainnya")
+  wifiHambatan       Int      @map("wifi_hambatan")
+  sulitTempatBelajar Int      @map("sulit_tempat_belajar")
+  sulitBahasa        Int?     @map("sulit_bahasa")
+  kebermanfaatan     Json
+  manfaatKeseluruhan Int      @map("manfaat_keseluruhan")
+  bersediaUjiCoba    String   @map("bersedia_uji_coba")
+  fiturTambahan      String?  @map("fitur_tambahan")
+  kontak             String?
+
+  @@index([createdAt(sort: Desc)], map: "survey_responses_created_at_idx")
+  @@map("survey_responses")
+}
