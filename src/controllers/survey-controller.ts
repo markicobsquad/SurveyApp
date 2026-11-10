@@ -11,6 +11,7 @@ import {
 } from '@/lib/survey-options'
 import type { SurveyFormData } from '@/lib/types'
 import { ADMIN_SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/admin-session'
+import { isValidEmail } from '@/lib/validation'
 import { createSurveyResponse, listSurveyResponses } from '@/models/survey-model'
 
 const isChoice = (value: string, choices: readonly { value: string }[]) =>
@@ -77,6 +78,7 @@ export async function submitSurvey(request: Request) {
   const sulitTempatBelajar = requiredScore(body.sulitTempatBelajar)
   const manfaatKeseluruhan = requiredScore(body.manfaatKeseluruhan)
   const bersediaUjiCoba = stringValue(body.bersediaUjiCoba)
+  const kontak = stringValue(body.kontak)
 
   const fields: string[] = []
   if (!isChoice(statusMahasiswa, STATUS_OPTIONS)) fields.push('statusMahasiswa')
@@ -91,6 +93,7 @@ export async function submitSurvey(request: Request) {
   if (sulitTempatBelajar === null) fields.push('sulitTempatBelajar')
   if (manfaatKeseluruhan === null) fields.push('manfaatKeseluruhan')
   if (!isChoice(bersediaUjiCoba, TRIAL_OPTIONS)) fields.push('bersediaUjiCoba')
+  if (!isValidEmail(kontak)) fields.push('kontak')
 
   const sulitBahasa = body.sulitBahasa == null ? null : requiredScore(body.sulitBahasa)
   if (body.sulitBahasa != null && sulitBahasa === null) fields.push('sulitBahasa')
@@ -115,7 +118,7 @@ export async function submitSurvey(request: Request) {
     manfaatKeseluruhan: manfaatKeseluruhan!,
     bersediaUjiCoba,
     fiturTambahan: optionalText(body.fiturTambahan),
-    kontak: optionalText(body.kontak),
+    kontak,
   }
 
   try {
