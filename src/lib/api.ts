@@ -1,5 +1,12 @@
 // Klien API untuk frontend — semua request relatif (tanpa absolut URL).
-import type { SurveyFormData, SurveyResponse, SurveyListResult, SurveySubmitResult } from './types'
+import type {
+  PublicSurveySummary,
+  PublicSurveySummaryResult,
+  SurveyFormData,
+  SurveyListResult,
+  SurveyResponse,
+  SurveySubmitResult,
+} from './types'
 
 /** Kirim respons survei ke backend. Melempar Error jika gagal. */
 export async function submitSurvey(data: SurveyFormData): Promise<string> {
@@ -23,4 +30,14 @@ export async function fetchSurveyResponses(): Promise<SurveyResponse[]> {
     throw new Error(json.error || 'FETCH_FAILED')
   }
   return json.responses
+}
+
+/** Fetch aggregate-only results for the public results page. */
+export async function fetchPublicSurveySummary(): Promise<PublicSurveySummary> {
+  const res = await fetch('/api/survey/results', { cache: 'no-store' })
+  const json = (await res.json().catch(() => ({}))) as PublicSurveySummaryResult
+  if (!res.ok || !json.ok || !json.summary) {
+    throw new Error(json.error || 'FETCH_RESULTS_FAILED')
+  }
+  return json.summary
 }
