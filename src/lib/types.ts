@@ -36,3 +36,25 @@ export interface SurveyListResult {
   responses?: SurveyResponse[]
   error?: string
 }
+
+export interface SurveyAggregateCount {
+  value: string
+  count: number
+}
+
+export interface PublicSurveySummary {
+  responseCount: number
+  averages: {
+    wifiDifficulty: number | null
+    studySpaceDifficulty: number | null
+    overallUsefulness: number | null
+  }
+  whatsappGroupDistribution: SurveyAggregateCount[]
+  trialWillingnessDistribution: SurveyAggregateCount[]
+}
+
+export interface PublicSurveySummaryResult {
+  ok: boolean
+  summary?: PublicSurveySummary
+  error?: string
+}
