@@ -2,7 +2,8 @@
 
 // Halaman publik survei — wizard 3 bagian, bilingual, validasi inline.
 import { useEffect, useMemo, useState } from 'react'
-import { ChevronLeft, Sparkles } from 'lucide-react'
+import Link from 'next/link'
+import { BarChart3, ChevronLeft, Sparkles } from 'lucide-react'
 import { useLang, useToast } from '@/components/providers'
 import {
   CTAButton,
@@ -247,6 +248,16 @@ export default function SurveyPage() {
               <h1 className="text-[21px] font-bold leading-snug text-white">{t('survey.title')}</h1>
               <p className="mt-2.5 text-[13px] leading-relaxed text-[#9AA3B5]">{t('survey.desc')}</p>
             </div>
+          </Container>
+
+          <Container className="mb-5">
+            <Link
+              href="/results"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 text-sm font-semibold text-white/80 transition-colors hover:bg-white/[0.08] hover:text-white"
+            >
+              <BarChart3 className="h-4 w-4 text-[#7FB2FF]" aria-hidden />
+              {t('results.link')}
+            </Link>
           </Container>
 
           {/* Progress bagian */}
